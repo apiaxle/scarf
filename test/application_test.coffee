@@ -37,7 +37,7 @@ class exports.TestApplication extends TwerpTest
         "/etc/bob/staging.json"
       ]
 
-    done 1
+    done 4
 
   "test loading good configuration": ( done ) ->
     opts =
@@ -48,7 +48,7 @@ class exports.TestApplication extends TwerpTest
       @isNull err
       @deepEqual config, {}
 
-      done 1
+      done 2
 
   "test loading invalid configuration": ( done ) ->
     opts =
