@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "underscore": "~1.4.4",
-    "amanda": "~0.4.5"
+    "amanda": "~0.4.5",
+    "log4js": "~0.6.2"
   }
 }

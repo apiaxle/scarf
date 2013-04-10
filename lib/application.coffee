@@ -23,7 +23,28 @@ class exports.Application
   getConfigurationSchema: ->
     {} =
       type: "object"
-      default: {}
+      additionalProperties: false
+      properties:
+        logging:
+          type: "object"
+          additionalProperties: false
+          properties:
+            level:
+              type: "string"
+              enum: [ "DEBUG", "INFO", "WARN", "FATAL" ]
+              default: "INFO"
+            appenders:
+              type: "array"
+              items:
+                type: "object"
+                additionalProperties: false
+                properties:
+                  type:
+                    type: "string"
+                    default: "file"
+                  filename:
+                    type: "string"
+                    default: "#{ @options.env }.log"
 
   # returns the err, data (from the parsed file)
   readConfiguration: ( cb ) ->
@@ -40,6 +61,13 @@ class exports.Application
           return cb null, data, filename
 
     return cb new Error "Failed to locate a configuration file."
+
+  setupLogger: ( config, cb ) ->
+    config = _.extend default_config, config
+    log4js.configure config
+
+    logger = log4js.getLogger()
+    logger.setLevel logging_config.level
 
   # run: ( host, port, cb ) ->
   #   app = express.createServer()

@@ -19,7 +19,7 @@ jsonSchemaValidator.addAttribute "is_valid_regexp", validRegexpAttribute
 
 # extract the default values into their own object
 extractDefaults = ( name, structure ) ->
-  if structure.type is "object"
+  if structure.type is "object" and structure.properties?
     out = {}
 
     for property, details of structure.properties
@@ -27,6 +27,10 @@ extractDefaults = ( name, structure ) ->
       out[property] = val if val isnt undefined
 
     return out
+
+  if structure.type is "array" and structure.items?
+    out = extractDefaults null, structure.items
+    return [ out ]
 
   # no default and it's not an object
   return undefined unless structure.default?

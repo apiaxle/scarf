@@ -46,7 +46,15 @@ class exports.TestApplication extends TwerpTest
     app = new FakeApplication opts
     app.readConfiguration ( err, config, config_filename ) =>
       @isNull err
-      @deepEqual config, {}
+      @deepEqual config,
+        logging:
+          level: "INFO"
+          appenders: [
+            {
+              type: "file",
+              filename: "development.log"
+            }
+          ]
 
       done 2
 
