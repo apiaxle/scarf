@@ -1,14 +1,23 @@
-class Application
-  constructor: ( options ) ->
+_ = require "underscore"
+
+class exports.Application
+  constructor: ( options={} ) ->
     # default options
-    def =
+    def_opt =
       env: ( process.env.NODE_ENV or "development" )
+      name: @constructor.name.toLowerCase()
 
-    def.name ||= @constructor.name.toLower()
+    # merge the defaults with those we got from the user
+    @options = _.extend def_opt, options
 
-    @final_options = _.extend options, default_options
+    # where to look for the configuration file
+    { name, env } = @options
+    def_opt.config_paths = [
+      "#{ process.env.HOME }/.#{ name }/#{ env }.json"
+      "/etc/#{ name }/#{ env }.json"
+    ]
 
-  readConfiguration: ( )
+  readConfiguration: ( ) ->
 
   run: ( host, port, cb ) ->
     app = express.createServer()

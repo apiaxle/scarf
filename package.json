@@ -20,5 +20,8 @@
   "license": "BSD",
   "devDependencies": {
     "twerp": "~1.0.7"
+  },
+  "dependencies": {
+    "underscore": "~1.4.4"
   }
 }
