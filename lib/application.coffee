@@ -1,4 +1,6 @@
 _ = require "underscore"
+fs = require "fs"
+validate = require "./validate"
 
 class exports.Application
   constructor: ( options={} ) ->
@@ -12,12 +14,32 @@ class exports.Application
 
     # where to look for the configuration file
     { name, env } = @options
-    def_opt.config_paths = [
+    @options.config_filenames ||= [
       "#{ process.env.HOME }/.#{ name }/#{ env }.json"
       "/etc/#{ name }/#{ env }.json"
     ]
 
-  readConfiguration: ( ) ->
+  # this should return a valid amanda json schema type document
+  getConfigurationSchema: ->
+    {} =
+      type: "object"
+      default: {}
 
-  run: ( host, port, cb ) ->
-    app = express.createServer()
+  # returns the err, data (from the parsed file)
+  readConfiguration: ( cb ) ->
+    for filename in @options.config_filenames
+      if fs.existsSync filename
+        data = null
+        try
+          data = JSON.parse( fs.readFileSync( filename ), "utf8" )
+        catch e
+          return cb new Error "Problem parsing #{filename}: #{e}"
+
+        schema = @getConfigurationSchema()
+        return validate schema, data, true, ( err, data ) ->
+          return cb null, data, filename
+
+    return cb new Error "Failed to locate a configuration file."
+
+  # run: ( host, port, cb ) ->
+  #   app = express.createServer()
