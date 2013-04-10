@@ -19,9 +19,11 @@
   "author": "Phil Jackson",
   "license": "BSD",
   "devDependencies": {
-    "twerp": "~1.0.7"
+    "twerp": "~1.0.7",
+    "grunt-cli": "~0.1.7"
   },
   "dependencies": {
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "amanda": "~0.4.5"
   }
 }
