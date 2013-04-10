@@ -1,0 +1,24 @@
+{
+  "name": "scarf",
+  "version": "0.0.1",
+  "description": "Lightwieght but prosumptious OOP wrapper for creating apps with express.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": "",
+  "keywords": [
+    "framework",
+    "express",
+    "config",
+    "log"
+  ],
+  "author": "Phil Jackson",
+  "license": "BSD",
+  "devDependencies": {
+    "twerp": "~1.0.7"
+  }
+}
