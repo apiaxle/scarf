@@ -2,6 +2,7 @@ _ = require "underscore"
 fs = require "fs"
 validate = require "./validate"
 readdir = require "recursive-readdir"
+express = require "express"
 
 class exports.Application
   constructor: ( options={} ) ->
@@ -19,6 +20,11 @@ class exports.Application
       "#{ process.env.HOME }/.#{ name }/#{ env }.json"
       "/etc/#{ name }/#{ env }.json"
     ]
+
+    @express = express()
+
+  # hands off to the express.use function
+  use: ( conf ) -> @express.use conf
 
   collectPlugins: ( path, cb ) ->
     readdir path, ( err, files ) ->
