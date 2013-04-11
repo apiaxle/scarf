@@ -1,6 +1,7 @@
 _ = require "underscore"
 fs = require "fs"
 validate = require "./validate"
+readdir = require "recursive-readdir"
 
 class exports.Application
   constructor: ( options={} ) ->
@@ -18,6 +19,25 @@ class exports.Application
       "#{ process.env.HOME }/.#{ name }/#{ env }.json"
       "/etc/#{ name }/#{ env }.json"
     ]
+
+  collectPlugins: ( path, cb ) ->
+    readdir path, ( err, files ) ->
+      return cb err if err
+
+      plugin_list = {}
+      for filename in files
+        continue unless matches = /(.+?)\.(coffee|js)$/.exec filename
+        name = matches[1]
+
+        try
+          classes = require name
+
+          for cls, func of classes
+            plugin_list[ cls ] = func
+        catch e
+          return cb new Error "Failed to load plugin #{ filename }: #{ e }"
+
+      return cb null, plugin_list
 
   # this should return a valid amanda json schema type document
   getConfigurationSchema: ->

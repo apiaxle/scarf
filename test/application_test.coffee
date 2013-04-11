@@ -1,3 +1,5 @@
+_ = require "underscore"
+
 { TwerpTest } = require "twerp"
 { Application } = require "../lib/application"
 
@@ -82,3 +84,20 @@ class exports.TestApplication extends TwerpTest
       @deepEqual config, { first_name: "Bob", last_name: "Jackson" }
 
       done 2
+
+  "test collecting plugins": ( done ) ->
+    app = new FakeApplication()
+    app.collectPlugins "#{ __dirname }/plugins", ( err, classes ) =>
+      @isNull err
+
+      @deepEqual _.keys( classes ).sort(), [
+        "Bert"
+        "Bob"
+        "Frank"
+        "HelloMoon"
+        "HelloWorld" ]
+
+      bert = new classes["Bert"]()
+      @equal bert.constructor.name, "Bert"
+
+      done 3
