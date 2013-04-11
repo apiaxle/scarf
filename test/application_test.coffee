@@ -47,6 +47,9 @@ class exports.TestApplication extends TwerpTest
     app.readConfiguration ( err, config, config_filename ) =>
       @isNull err
       @deepEqual config,
+        application:
+          port: 5000
+          host: "localhost"
         logging:
           level: "INFO"
           appenders: [

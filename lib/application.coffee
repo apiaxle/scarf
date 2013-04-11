@@ -25,6 +25,16 @@ class exports.Application
       type: "object"
       additionalProperties: false
       properties:
+        application:
+          type: "object"
+          additionalProperties: false
+          properties:
+            port:
+              type: "string"
+              default: 5000
+            host:
+              type: "string"
+              default: "localhost"
         logging:
           type: "object"
           additionalProperties: false
