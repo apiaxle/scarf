@@ -121,5 +121,8 @@ class exports.Application
     logger = log4js.getLogger()
     logger.setLevel logging_config.level
 
-  # run: ( host, port, cb ) ->
-  #   app = express.createServer()
+  # run the application on port, host (defaults to the ones taken from
+  # the configuration) the rest of the arguments are passed to
+  # @express.listen (http://nodejs.org/api/http.html).
+  run: ( port=@config.application.port, host=@config.application.host, rest... ) ->
+    @express.listen port, hostname, rest...
