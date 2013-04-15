@@ -1,5 +1,6 @@
 _ = require "lodash"
 fs = require "fs"
+log4js = require "log4js"
 validate = require "./validate"
 readdir = require "recursive-readdir"
 express = require "express"
@@ -117,14 +118,19 @@ class exports.Application
     return cb new Error "Failed to locate a configuration file. Tried #{ tried }."
 
   setupLogger: ( config, cb ) ->
-    config = _.extend default_config, config
     log4js.configure config
 
-    logger = log4js.getLogger()
-    logger.setLevel logging_config.level
+    logger = null
+    try
+      logger = log4js.getLogger()
+      logger.setLevel @config.logging.level
+    catch err
+      return cb err
+
+    return cb null, logger
 
   # run the application on port, host (defaults to the ones taken from
   # the configuration) the rest of the arguments are passed to
   # @express.listen (http://nodejs.org/api/http.html).
-  run: ( port=@config.application.port, host=@config.application.host, rest... ) ->
-    @express.listen port, hostname, rest...
+  run: ->
+    @express.listen arguments
