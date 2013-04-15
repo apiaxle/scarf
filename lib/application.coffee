@@ -49,7 +49,7 @@ class exports.Application
           for cls, func of classes
             plugin_list[ cls ] = func
         catch e
-          return cb new Error "Failed to load plugin #{ filename }: #{ e }"
+          return cb new Error "Failed to load plugin '#{ filename }': #{ e }"
 
       return cb null, plugin_list
 
