@@ -9,4 +9,8 @@ class exports.Controller
     @app.express[ verb ] @path(), @middleware(), ( req, res, next ) =>
       @execute req, res, next
 
+    # convenience to allow setting @locals from middleware
+    @locals = @app.express.locals
+    @render = @app.express.render
+
   middleware: ( ) -> []

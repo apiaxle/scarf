@@ -25,9 +25,10 @@ class exports.Application
 
     @express = express()
 
-  use: ( ) -> @express.use arguments
-  param: ( ) -> @express.param arguments
-  error: ( ) -> @express.error arguments
+  set: ( ) -> @express.set arguments...
+  use: ( ) -> @express.use arguments...
+  param: ( ) -> @express.param arguments...
+  error: ( ) -> @express.error arguments...
 
   # scan a directory (path) looking for all js/coffee files and then
   # return a map of { name: class } pairs after the file was
