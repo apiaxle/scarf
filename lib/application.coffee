@@ -23,8 +23,9 @@ class exports.Application
 
     @express = express()
 
-  use: ( args... ) -> @express.use args...
-  param: ( args... ) -> @express.param args...
+  use: ( ) -> @express.use arguments
+  param: ( ) -> @express.param arguments
+  error: ( ) -> @express.error arguments
 
   # scan a directory (path) looking for all js/coffee files and then
   # return a map of { name: class } pairs after the file was
@@ -93,7 +94,6 @@ class exports.Application
               type: "string"
               default: "localhost"
 
-
   # all of the configuration combined
   getConfigurationSchema: ->
     _.merge @getAppConfigSchema(), @getLoggingConfigSchema()
@@ -112,7 +112,8 @@ class exports.Application
         return validate schema, data, true, ( err, data ) ->
           return cb null, data, filename
 
-    return cb new Error "Failed to locate a configuration file."
+    tried = @options.config_filenames.join( ", " )
+    return cb new Error "Failed to locate a configuration file. Tried #{ tried }."
 
   setupLogger: ( config, cb ) ->
     config = _.extend default_config, config
