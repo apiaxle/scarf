@@ -19,6 +19,7 @@ class exports.Application
     @options.config_filenames ||= [
       "#{ process.env.HOME }/.#{ name }/#{ env }.json"
       "/etc/#{ name }/#{ env }.json"
+      "./config/#{env}.json"
     ]
 
     @express = express()

@@ -28,6 +28,7 @@ class exports.TestApplication extends TwerpTest
       config_filenames: [
         "#{ home }/.fakeapplication/development.json"
         "/etc/fakeapplication/development.json"
+        "./config/development.json"
       ]
 
     @ok app = new FakeApplication { env: "staging", name: "bob" }
@@ -37,6 +38,7 @@ class exports.TestApplication extends TwerpTest
       config_filenames: [
         "#{ home }/.bob/staging.json"
         "/etc/bob/staging.json"
+        "./config/staging.json"
       ]
 
     done 4
