@@ -49,6 +49,7 @@ class exports.Application
 
       return cb null, plugin_list
 
+  # json schema for configuration in the config file
   getLoggingConfigSchema: ->
     {}=
       type: "object"
@@ -75,7 +76,7 @@ class exports.Application
                     type: "string"
                     default: "#{ @options.env }.log"
 
-  # this should return a valid amanda json schema type document
+  # json schema for the application in the config file
   getAppConfigSchema: ->
     {} =
       type: "object"
@@ -93,6 +94,7 @@ class exports.Application
               default: "localhost"
 
 
+  # all of the configuration combined
   getConfigurationSchema: ->
     _.merge @getAppConfigSchema(), @getLoggingConfigSchema()
 
