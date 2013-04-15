@@ -54,6 +54,7 @@ class exports.TestApplication extends TwerpTest
         application:
           port: 5000
           host: "localhost"
+          debug: false
         logging:
           level: "INFO"
           appenders: [

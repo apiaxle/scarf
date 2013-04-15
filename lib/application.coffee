@@ -90,6 +90,9 @@ class exports.Application
           type: "object"
           additionalProperties: false
           properties:
+            debug:
+              type: "boolean"
+              default: false
             port:
               type: "string"
               default: 5000
