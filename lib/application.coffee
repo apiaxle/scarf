@@ -26,6 +26,10 @@ class exports.Application
   use: ( args... ) -> @express.use args...
   param: ( args... ) -> @express.param args...
 
+  # scan a directory (path) looking for all js/coffee files and then
+  # return a map of { name: class } pairs after the file was
+  # required. If two classes have the same name then the last one
+  # loaded takes presidence.
   collectPlugins: ( path, cb ) ->
     readdir path, ( err, files ) ->
       return cb err if err
