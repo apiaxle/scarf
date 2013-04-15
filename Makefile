@@ -1,4 +1,7 @@
-JS=lib/application.js lib/controller.js lib/validate.js
+JS=lib/application.js \
+   lib/controller.js \
+   lib/validate.js \
+   index.js
 
 all: $(JS)
 
@@ -6,7 +9,7 @@ clean:
 	-rm -f $(JS)
 
 %.js: %.coffee
-	coffee -m -b -c $<
+	coffee -b -c $<
 
 test: $(JS)
 	twerp test/*.coffee
