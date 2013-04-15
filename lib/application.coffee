@@ -94,7 +94,7 @@ class exports.Application
               type: "boolean"
               default: false
             port:
-              type: "string"
+              type: "integer"
               default: 5000
             debug:
               type: "boolean"
