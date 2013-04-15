@@ -6,7 +6,7 @@ class exports.Controller
     if not @path?
       throw new Error "'#{ @constructor.name } needs a path method."
 
-    @app.app[ verb ] @path(), @middleware(), ( req, res, next ) =>
+    @app.express[ verb ] @path(), @middleware(), ( req, res, next ) =>
       @execute req, res, next
 
   middleware: ( ) -> []
