@@ -1,4 +1,4 @@
-_ = require "underscore"
+_ = require "lodash"
 fs = require "fs"
 validate = require "./validate"
 readdir = require "recursive-readdir"
@@ -12,7 +12,7 @@ class exports.Application
       name: @constructor.name.toLowerCase()
 
     # merge the defaults with those we got from the user
-    @options = _.extend def_opt, options
+    @options = _.merge def_opt, options
 
     # where to look for the configuration file
     { name, env } = @options
@@ -23,8 +23,8 @@ class exports.Application
 
     @express = express()
 
-  # hands off to the express.use function
-  use: ( conf ) -> @express.use conf
+  use: ( args... ) -> @express.use args...
+  param: ( args... ) -> @express.param args...
 
   collectPlugins: ( path, cb ) ->
     readdir path, ( err, files ) ->
@@ -45,22 +45,11 @@ class exports.Application
 
       return cb null, plugin_list
 
-  # this should return a valid amanda json schema type document
-  getConfigurationSchema: ->
-    {} =
+  getLoggingConfigSchema: ->
+    {}=
       type: "object"
       additionalProperties: false
       properties:
-        application:
-          type: "object"
-          additionalProperties: false
-          properties:
-            port:
-              type: "string"
-              default: 5000
-            host:
-              type: "string"
-              default: "localhost"
         logging:
           type: "object"
           additionalProperties: false
@@ -81,6 +70,27 @@ class exports.Application
                   filename:
                     type: "string"
                     default: "#{ @options.env }.log"
+
+  # this should return a valid amanda json schema type document
+  getAppConfigSchema: ->
+    {} =
+      type: "object"
+      additionalProperties: false
+      properties:
+        application:
+          type: "object"
+          additionalProperties: false
+          properties:
+            port:
+              type: "string"
+              default: 5000
+            host:
+              type: "string"
+              default: "localhost"
+
+
+  getConfigurationSchema: ->
+    _.merge @getAppConfigSchema(), @getLoggingConfigSchema()
 
   # returns the err, data (from the parsed file)
   readConfiguration: ( cb ) ->

@@ -1,4 +1,4 @@
-_ = require "underscore"
+_ = require "lodash"
 
 amanda = require "amanda"
 jsonSchemaValidator = amanda "json"

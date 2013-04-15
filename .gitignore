@@ -1,1 +1,4 @@
 /node_modules/
+/lib/application.js
+/lib/controller.js
+/lib/validate.js

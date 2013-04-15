@@ -1,4 +1,4 @@
-_ = require "underscore"
+_ = require "lodash"
 
 { TwerpTest } = require "twerp"
 { Application } = require "../lib/application"
