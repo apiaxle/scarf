@@ -6,7 +6,7 @@ clean:
 	-rm -f $(JS)
 
 %.js: %.coffee
-	coffee -b -c $<
+	coffee -m -b -c $<
 
 test: $(JS)
 	twerp test/*.coffee
