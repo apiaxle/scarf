@@ -47,4 +47,4 @@ module.exports = ( structure, data, fill_defaults, cb ) ->
     return cb null, structure.properties unless fill_defaults
 
     # merge the valid with the new defaults
-    return cb null, _.extend extractDefaults( null, structure ), data
+    return cb null, _.merge extractDefaults( null, structure ), data
