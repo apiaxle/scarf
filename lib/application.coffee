@@ -93,6 +93,9 @@ class exports.Application
             port:
               type: "string"
               default: 5000
+            debug:
+              type: "boolean"
+              default: false
             host:
               type: "string"
               default: "localhost"
