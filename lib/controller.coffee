@@ -1,4 +1,5 @@
 _ = require "lodash"
+util = require "util"
 
 class exports.Controller
   constructor: ( @app ) ->
@@ -16,6 +17,7 @@ class exports.Controller
 
     # some handy stuff for the templates
     @locals.title = @constructor.title if @constructor.title
+    @locals.inspect = util.inspect
     @locals._ = _
 
     @render = @app.express.render
