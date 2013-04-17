@@ -1,3 +1,5 @@
+_ = require "lodash"
+
 class exports.Controller
   constructor: ( @app ) ->
     if not verb = @constructor.verb
@@ -11,6 +13,9 @@ class exports.Controller
 
     # convenience to allow setting @locals from middleware
     @locals = @app.express.locals
+    @locals.title = @constructor.title if @constructor.title
+    @locals._ = _
+
     @render = @app.express.render
 
   middleware: ( ) -> []
