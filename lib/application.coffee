@@ -113,6 +113,7 @@ class exports.Application
 
         schema = @getConfigurationSchema()
         return validate schema, data, true, ( err, data ) ->
+          return cb err if err
           return cb null, data, filename
 
     tried = @options.config_filenames.join( ", " )
