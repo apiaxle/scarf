@@ -13,6 +13,8 @@ class exports.Controller
 
     # convenience to allow setting @locals from middleware
     @locals = @app.express.locals
+
+    # some handy stuff for the templates
     @locals.title = @constructor.title if @constructor.title
     @locals._ = _
 
