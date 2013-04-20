@@ -11,6 +11,8 @@ class exports.Application
     def_opt =
       env: ( process.env.NODE_ENV or "development" )
       name: @constructor.name.toLowerCase()
+      port: 5000
+      host: "127.0.0.1"
 
     # merge the defaults with those we got from the user
     @options = _.merge def_opt, options
@@ -93,15 +95,9 @@ class exports.Application
             debug:
               type: "boolean"
               default: false
-            port:
-              type: "integer"
-              default: 5000
             debug:
               type: "boolean"
               default: false
-            host:
-              type: "string"
-              default: "localhost"
 
   # all of the configuration combined
   getConfigurationSchema: ->
@@ -138,7 +134,8 @@ class exports.Application
     return cb null, logger
 
   # run the application on port, host (defaults to the ones taken from
-  # the configuration) the rest of the arguments are passed to
+  # the options) the rest of the arguments are passed to
   # @express.listen (http://nodejs.org/api/http.html).
-  run: ->
-    @express.listen arguments
+  run: ( cb ) ->
+    @logger.info "Listening at #{ @options.host}:#{ @options.port }"
+    @express.listen @options.port, @options.host, cb
