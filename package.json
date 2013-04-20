@@ -25,9 +25,9 @@
   "dependencies": {
     "amanda": "~0.4.5",
     "log4js": "~0.6.2",
-    "recursive-readdir": "0.0.1",
     "express": "~3.1.1",
     "lodash": "~1.1.1",
-    "ejs": "~0.8.3"
+    "ejs": "~0.8.3",
+    "glob": "~3.1.21"
   }
 }

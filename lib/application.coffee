@@ -2,7 +2,7 @@ _ = require "lodash"
 fs = require "fs"
 log4js = require "log4js"
 validate = require "./validate"
-readdir = require "recursive-readdir"
+glob = require "glob"
 express = require "express"
 
 class exports.Application
@@ -34,8 +34,8 @@ class exports.Application
   # return a map of { name: class } pairs after the file was
   # required. If two classes have the same name then the last one
   # loaded takes presidence.
-  collectPlugins: ( path, cb ) ->
-    readdir path, ( err, files ) ->
+  collectPlugins: ( glob_def, cb ) ->
+    glob glob_def, {}, ( err, files ) ->
       return cb err if err
 
       plugin_list = {}
@@ -122,7 +122,7 @@ class exports.Application
           return cb err if err
           return cb null, data, filename
 
-    tried = @options.config_filenames.join( ", " )
+    tried = @options.config_filenames.join ", "
     return cb new Error "Failed to locate a configuration file. Tried #{ tried }."
 
   setupLogger: ( config, cb ) ->

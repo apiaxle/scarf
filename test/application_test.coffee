@@ -90,7 +90,7 @@ class exports.TestApplication extends TwerpTest
 
   "test collecting plugins": ( done ) ->
     app = new FakeApplication()
-    app.collectPlugins "#{ __dirname }/plugins", ( err, classes ) =>
+    app.collectPlugins "#{ __dirname }/plugins/**/*.coffee", ( err, classes ) =>
       @isNull err
 
       @deepEqual _.keys( classes ).sort(), [
