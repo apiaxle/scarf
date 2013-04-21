@@ -17,7 +17,7 @@ class exports.Controller
 
     # some handy stuff for the templates
     @locals.title = @constructor.title if @constructor.title
-    @locals.inspect = util.inspect
+    @locals.inspect = ( object ) -> util.inspect object, depth: null
     @locals._ = _
 
     @render = @app.express.render
