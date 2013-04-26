@@ -14,6 +14,9 @@ clean:
 test: $(JS)
 	twerp test/*.coffee
 
+publish: $(JS)
+	npm publish
+
 watch:
 	while /bin/true; do inotifywait -qre close_write --format "%w %f" .; make test clean; done
 
