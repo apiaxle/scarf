@@ -81,7 +81,7 @@ class exports.Application
                     default: "file"
                   filename:
                     type: "string"
-                    default: "#{ @options.env }.log"
+                    default: "#{ @options.env }-#{ @options.port }.log"
 
   # json schema for the application in the config file
   getAppConfigSchema: ->
@@ -116,8 +116,9 @@ class exports.Application
           return cb err if err
           return cb null, data, filename
 
-    tried = @options.config_filenames.join ", "
-    return cb null, {}, "<memory>"
+    schema = @getConfigurationSchema()
+    return validate schema, {}, true, ( err, data ) ->
+      return cb null, data, "<memory>"
 
   setupLogger: ( config, cb ) ->
     log4js.configure config
