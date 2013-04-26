@@ -42,9 +42,15 @@ extractDefaults = ( name, structure ) ->
 # errors if there are any and will pad the structure with defaults if
 # `fill_defaults` is set to true
 module.exports = ( structure, data, fill_defaults, cb ) ->
-  jsonSchemaValidator.validate data, structure, ( err ) ->
-    return cb err if err
+  jsonSchemaValidator.validate data, structure, ( errs ) ->
+    message = []
+    for index, err of errs
+      message.push err.message if err.message
+
+    return cb new Error( message.join( ", " ) ) if err
+
+    # perhaps fill defaults
     return cb null, structure.properties unless fill_defaults
 
-    # merge the valid with the new defaults
-    return cb null, _.merge extractDefaults( null, structure ), data
+    merged_defaults = _.merge( extractDefaults( null, structure ), data )
+    return cb null, merged_defaults
