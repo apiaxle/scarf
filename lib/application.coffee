@@ -117,7 +117,7 @@ class exports.Application
           return cb null, data, filename
 
     tried = @options.config_filenames.join ", "
-    return cb new Error "Failed to locate a configuration file. Tried #{ tried }."
+    return cb null, {}, "<memory>"
 
   setupLogger: ( config, cb ) ->
     log4js.configure config
