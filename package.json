@@ -1,13 +1,14 @@
 {
   "name": "scarf",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Lightwieght but presumptuous OOP wrapper for creating apps with express.",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "make test",
+    "prepublish": "make"
   },
   "repository": "",
   "keywords": [
