@@ -69,18 +69,19 @@ class exports.Application
             level:
               type: "string"
               enum: [ "DEBUG", "INFO", "WARN", "FATAL" ]
-              default: "INFO"
+              default: "DEBUG"
             appenders:
               type: "array"
               items:
                 type: "object"
-                additionalProperties: false
+                additionalProperties: true
                 properties:
                   type:
                     type: "string"
-                    default: "file"
+                    default: "console"
                   filename:
                     type: "string"
+                    optional: true
                     default: "#{ @options.env }-#{ @options.port }.log"
 
   # json schema for the application in the config file
