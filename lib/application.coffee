@@ -133,9 +133,12 @@ class exports.Application
 
     return cb null, logger
 
+  close: ->
+    @server.close()
+
   # run the application on port, host (defaults to the ones taken from
   # the options) the rest of the arguments are passed to
   # @express.listen (http://nodejs.org/api/http.html).
   run: ( cb ) ->
     @logger.info "Listening at #{ @options.host}:#{ @options.port }"
-    @express.listen @options.port, @options.host, cb
+    @server = @express.listen @options.port, @options.host, cb
