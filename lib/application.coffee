@@ -31,6 +31,7 @@ class exports.Application
   use: ( ) -> @express.use arguments...
   param: ( ) -> @express.param arguments...
   error: ( ) -> @express.error arguments...
+  enable: ( ) -> @express.enable arguments...
 
   # scan a directory (path) looking for all js/coffee files and then
   # return a map of { name: class } pairs after the file was
@@ -92,9 +93,6 @@ class exports.Application
           type: "object"
           additionalProperties: false
           properties:
-            debug:
-              type: "boolean"
-              default: false
             debug:
               type: "boolean"
               default: false
