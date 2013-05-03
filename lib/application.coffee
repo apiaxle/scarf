@@ -69,7 +69,7 @@ class exports.Application
             level:
               type: "string"
               enum: [ "DEBUG", "INFO", "WARN", "FATAL" ]
-              default: "DEBUG"
+              default: "INFO"
             appenders:
               type: "array"
               items:
