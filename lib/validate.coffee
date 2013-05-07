@@ -47,6 +47,10 @@ module.exports = ( structure, data, fill_defaults, cb ) ->
     for index, err of errs
       message.push err.message if err.message
 
+      # additional props need special handling
+      if err.validator is "additionalProperties"
+        message.push "'#{ err.property }' is not a supported field."
+
     return cb new Error( message.join( ", " ) ) if err
 
     # perhaps fill defaults
