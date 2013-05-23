@@ -29,6 +29,6 @@ class exports.ViewController extends exports.Controller
     res.locals._ = _
     res.locals.js = @constructor.js
     res.locals.css = @constructor.css
-    res.locals.inspect = ( object ) -> util.inspect object, depth: null
+    res.locals.toJson = ( object ) -> JSON.stringify object
 
     super req, res, next
