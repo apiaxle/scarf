@@ -1,6 +1,6 @@
 {
   "name": "scarf",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Lightweight but presumptuous OOP wrapper for creating apps with express.",
   "main": "index.js",
   "directories": {
@@ -24,7 +24,7 @@
     "grunt-cli": "~0.1.7"
   },
   "dependencies": {
-    "amanda": "~0.4.5",
+    "amanda": "~0.4.7",
     "log4js": "~0.6.2",
     "express": "~3.1.1",
     "lodash": "~1.1.1",

@@ -7,6 +7,10 @@ express = require "express"
 
 class exports.Application
   constructor: ( options={} ) ->
+    @setOptions options
+    @express = express()
+
+  setOptions: ( options ) ->
     # default options
     def_opt =
       env: ( process.env.NODE_ENV or "development" )
@@ -24,8 +28,6 @@ class exports.Application
       "/etc/#{ name }/#{ env }.json"
       "./config/#{env}.json"
     ]
-
-    @express = express()
 
   set: ( ) -> @express.set arguments...
   use: ( ) -> @express.use arguments...
