@@ -1,6 +1,6 @@
 {
   "name": "scarf",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Lightweight but presumptuous OOP wrapper for creating apps with express.",
   "main": "index.js",
   "directories": {
